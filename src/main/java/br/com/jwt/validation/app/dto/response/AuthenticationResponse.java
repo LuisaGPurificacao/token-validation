@@ -12,5 +12,6 @@ import lombok.Setter;
 public class AuthenticationResponse {
 
     private boolean isTokenValid;
+    private String description;
 
 }

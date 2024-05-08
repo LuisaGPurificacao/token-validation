@@ -2,7 +2,7 @@ package br.com.jwt.validation.app.resource;
 
 import br.com.jwt.validation.app.dto.request.AuthenticationRequest;
 import br.com.jwt.validation.app.dto.response.AuthenticationResponse;
-import br.com.jwt.validation.app.service.impl.AuthenticationService;
+import br.com.jwt.validation.app.service.IAuthenticationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationResource {
 
     @Autowired
-    AuthenticationService service;
+    IAuthenticationService service;
 
     @PostMapping(path = "/validate-token")
     public AuthenticationResponse validateToken(@RequestBody AuthenticationRequest request) {
