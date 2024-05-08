@@ -1,4 +1,4 @@
-package br.com.jwt.jwtvalidation;
+package br.com.jwt.validation;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

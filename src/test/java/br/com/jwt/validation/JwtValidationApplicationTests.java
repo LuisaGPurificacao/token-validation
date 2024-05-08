@@ -1,4 +1,4 @@
-package br.com.jwt.jwtvalidation;
+package br.com.jwt.validation;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
