@@ -10,24 +10,30 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthenticationUseCase implements IAuthenticationUseCase {
 
-    private String description = null;
+    private String errorDescription = null;
 
     public AuthenticationResponse validateToken(UserEntity userEntity) {
         log.info("[USE CASE] Validating token information");
-        boolean isNameValid = validateName(userEntity.getName());
-
         boolean isSeedValid = validateSeed(userEntity.getSeed());
+
+        boolean isNameValid = validateName(userEntity.getName());
         log.info("[USE CASE] Token information validated");
 
         boolean isTokenValid = isSeedValid && isNameValid;
 
-        return new AuthenticationResponse(isTokenValid, description);
+        if (isTokenValid)
+            errorDescription = null;
+
+        return AuthenticationResponse.builder()
+                .isTokenValid(isTokenValid)
+                .errorDescription(errorDescription)
+                .build();
     }
 
     private boolean validateSeed(Integer seed) {
         for (int i = 2; i <= Math.sqrt(seed); i++) {
             if (seed % i == 0) {
-                description = "Seed is not a prime number";
+                errorDescription = "Seed is not a prime number";
                 return false;
             }
         }
@@ -37,10 +43,10 @@ public class AuthenticationUseCase implements IAuthenticationUseCase {
     private boolean validateName(String name) {
         boolean isNameOnlyLetters = name.matches("^[a-zA-Z\\s]*$");
         if (!isNameOnlyLetters)
-            description = "Seed is not a prime number";
+            errorDescription = "Name is not only letters";
         boolean isNameWithinMaxLength = name.length() <= 256;
         if (!isNameWithinMaxLength)
-            description = "Name contains more than 256 characters";
+            errorDescription = "Name contains more than 256 characters";
         return (isNameOnlyLetters && isNameWithinMaxLength);
     }
 

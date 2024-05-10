@@ -1,17 +1,19 @@
 package br.com.jwt.validation.app.dto.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class AuthenticationResponse {
 
     private boolean isTokenValid;
-    private String description;
+    private String errorDescription;
+
+    public boolean getIsTokenValid() {
+        return isTokenValid;
+    }
 
 }
