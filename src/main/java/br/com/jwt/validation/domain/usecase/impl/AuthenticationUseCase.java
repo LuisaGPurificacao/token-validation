@@ -3,51 +3,43 @@ package br.com.jwt.validation.domain.usecase.impl;
 import br.com.jwt.validation.app.dto.response.AuthenticationResponse;
 import br.com.jwt.validation.domain.entity.UserEntity;
 import br.com.jwt.validation.domain.usecase.IAuthenticationUseCase;
+import br.com.jwt.validation.domain.validation.ValidationStrategy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Component
 public class AuthenticationUseCase implements IAuthenticationUseCase {
 
-    private String errorDescription = null;
+    private final List<ValidationStrategy> validationStrategies;
+
+    public AuthenticationUseCase(List<ValidationStrategy> validationStrategies) {
+        this.validationStrategies = validationStrategies;
+    }
 
     public AuthenticationResponse validateToken(UserEntity userEntity) {
         log.info("[USE CASE] Validating token information");
-        boolean isSeedValid = validateSeed(userEntity.getSeed());
+        boolean isTokenValid = validationStrategies.stream()
+                .allMatch(strategy -> strategy.isValid(userEntity));
 
-        boolean isNameValid = validateName(userEntity.getName());
         log.info("[USE CASE] Token information validated");
 
-        boolean isTokenValid = isSeedValid && isNameValid;
-
-        if (isTokenValid)
-            errorDescription = null;
+        String errorDescription = null;
+        if (!isTokenValid) {
+            errorDescription = validationStrategies.stream()
+                    .filter(strategy -> !strategy.isValid(userEntity))
+                    .map(ValidationStrategy::getErrorMessage)
+                    .collect(Collectors.joining(", "));
+        }
 
         return AuthenticationResponse.builder()
                 .isTokenValid(isTokenValid)
                 .errorDescription(errorDescription)
                 .build();
-    }
-
-    private boolean validateSeed(Integer seed) {
-        for (int i = 2; i <= Math.sqrt(seed); i++) {
-            if (seed % i == 0) {
-                errorDescription = "Seed is not a prime number";
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private boolean validateName(String name) {
-        boolean isNameOnlyLetters = name.matches("^[a-zA-Z\\s]*$");
-        if (!isNameOnlyLetters)
-            errorDescription = "Name is not only letters";
-        boolean isNameWithinMaxLength = name.length() <= 256;
-        if (!isNameWithinMaxLength)
-            errorDescription = "Name contains more than 256 characters";
-        return (isNameOnlyLetters && isNameWithinMaxLength);
     }
 
 }
