@@ -11,8 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static br.com.jwt.validation.fixture.AuthenticationFixture.getValidRequest;
-import static br.com.jwt.validation.fixture.AuthenticationFixture.getValidResponse;
+import static br.com.jwt.validation.fixture.AuthenticationFixture.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -39,6 +38,20 @@ class AuthenticationResourceTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.isTokenValid").value(true))
                 .andExpect(jsonPath("$.errorDescription").doesNotExist());
+
+        verify(service, times(1)).validateToken(any(AuthenticationRequest.class));
+    }
+
+    @Test
+    void testValidateTokenFail() throws Exception {
+        when(service.validateToken(any(AuthenticationRequest.class))).thenReturn(getInvalidResponse());
+
+        mockMvc.perform(post("/validate-token")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new ObjectMapper().writeValueAsString(getValidRequest())))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.isTokenValid").value(false))
+                .andExpect(jsonPath("$.errorDescription").value("error"));
 
         verify(service, times(1)).validateToken(any(AuthenticationRequest.class));
     }
