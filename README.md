@@ -45,9 +45,9 @@ Uma API para validação de um Json Web Token
 ### 2ª Opção: Rodar o .jar pelo terminal
 
 - Abrir o terminal do seu computador
-- Ir até o caminho do projeto e entrar na pasta "target" do projeto (token-validation)    
-- `cd token-validation/target`
-- Rodar o comando: `java -jar jwt-validation-0.0.1-SNAPSHOT.jar`
+- Ir até o caminho do projeto e entrar na pasta do projeto (token-validation)    
+- `cd token-validation`
+- Rodar o comando: `java -jar jwt-validation.jar`
 - A aplicação vai começar a rodar, e você poderá acompanhar os logs pelo terminal do seu computador
 
 ---
