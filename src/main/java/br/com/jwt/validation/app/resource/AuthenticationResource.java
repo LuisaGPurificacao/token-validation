@@ -4,6 +4,8 @@ import br.com.jwt.validation.app.dto.request.AuthenticationRequest;
 import br.com.jwt.validation.app.dto.response.AuthenticationResponse;
 import br.com.jwt.validation.app.service.IAuthenticationService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,12 +21,12 @@ public class AuthenticationResource {
     }
 
     @PostMapping(path = "/validate-token")
-    public AuthenticationResponse validateToken(@RequestBody AuthenticationRequest request) {
+    public ResponseEntity<AuthenticationResponse> validateToken(@RequestBody AuthenticationRequest request) {
         log.info("[RESOURCE] Received JWT, starting process");
         log.debug("[RESOURCE] Token: {}", request.getToken());
         AuthenticationResponse response = service.validateToken(request);
         log.info("[RESOURCE] Process finished, returning if token is valid");
-        return response;
+        return ResponseEntity.status(response.getIsTokenValid() ? HttpStatus.OK : HttpStatus.BAD_REQUEST).body(response);
     }
 
 }
