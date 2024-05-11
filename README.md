@@ -29,6 +29,7 @@ Uma API para validação de um Json Web Token
 
 - JDK 17
 - Opcional: alguma IDE
+- Opcional: Docker
 
 ### Baixar o projeto:
 
@@ -49,6 +50,15 @@ Uma API para validação de um Json Web Token
 - `cd token-validation`
 - Rodar o comando: `java -jar jwt-validation.jar`
 - A aplicação vai começar a rodar, e você poderá acompanhar os logs pelo terminal do seu computador
+
+### 3ª Opção: Rodar com Docker
+- Abrir o terminal do seu computador
+- Ir até o caminho do projeto e entrar na pasta do projeto (token-validation)
+- `cd token-validation`
+- Rodar o comando: `docker build -t jwt-validation .` para construir a imagem Docker (você pode alterar o nome da imagem no comando)
+- Após a construção da imagem, rode esse comando `docker run -p 8080:8080 jwt-validation`, para executar o contâiner.
+- A aplicação vai começar a rodar, e você poderá acompanhar os logs pelo terminal do seu computador
+- Você pode também executar o contâiner pelo Docker Desktop, e acompanhar os logs por lá.
 
 ---
 
