@@ -1,0 +1,178 @@
+{
+	"info": {
+		"_postman_id": "847f0800-1a49-4b8d-8622-c346f812fca8",
+		"name": "authentication",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23526455"
+	},
+	"item": [
+		{
+			"name": "jwt valid",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJTZWVkIjoiNzg0MSIsIk5hbWUiOiJUb25pbmhvIEFyYXVqbyJ9.8qBykiT3AAOZqS0ov2wYmuIMJZwDiEGiFiJ_Pvfl6-Y\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/validate-token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"validate-token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "jwt invalid",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJhbGciOiJzI1NiJ9.dfsdfsfryJSr2xrIjoiQWRtaW4iLCJTZrkIjoiNzg0MSIsIk5hbrUiOiJUb25pbmhvIEFyYXVqbyJ9.QY05fsdfsIjtrcJnP533kQNk8QXcaleJ1Q01jWY_ZzIZuAg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/validate-token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"validate-token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "jwt invalid - payload invalid",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiTWVtYmVyIiwiT3JnIjoiQlIiLCJTZWVkIjoiMTQ2MjciLCJOYW1lIjoiVmFsZGlyIEFyYW5oYSJ9.pWKqHSiSZau7ORXrX70vgOkDiXptsyd6Lahxd9esW5E\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/validate-token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"validate-token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "jwt invalid - seed is not a prime number",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJTZWVkIjoiMTYxNiIsIk5hbWUiOiJUb25pbmhvIEFyYXVqbyJ9.jdtm6AzXxpX_J2jsPqGPqR2hNQw3h8tkbqW1vkOkZdU\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/validate-token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"validate-token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "jwt invalid - name is not only letters",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiRXh0ZXJuYWwiLCJTZWVkIjoiODgwMzciLCJOYW1lIjoiTTRyaWEgT2xpdmlhIn0.YXuwcQuAzl6kDTq4Byuhoa849wE5La8AHNZFL3Z7l0A\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/validate-token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"validate-token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "jwt invalid - name has more than 256 characters",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiTWVtYmVyIiwiU2VlZCI6IjE3IiwiTmFtZSI6IlZhbGRpciBBcmFuaGFhYWFhYWFhVmFsZGlyIEFyYW5oYWFhYWFhYWFWYWxkaXIgQXJhbmhhYWFhYWFhYVZhbGRpciBBcmFuaGFhYWFhYWFhVmFsZGlyIEFyYW5oYWFhYWFhYWFWYWxkaXIgQXJhbmhhYWFhYWFhYVZhbGRpciBBcmFuaGFhYWFhYWFhVmFsZGlyIEFyYW5oYWFhYWFhYWFWYWxkaXIgQXJhbmhhYWFhYWFhYVZhbGRpciBBcmFuaGFhYWFhYWFhVmFsZGlyIEFyYW5oYWFhYWFhYWFWYWxkaXIgQXJhbmhhYWFhYWFhYVZhbGRpciBBcmFuaGFhYWFhIn0.DxdmXUWKH1ZckjOV5Ic3OPFvviCUrkVZegQyqN4mIVQ\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/validate-token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"validate-token"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
