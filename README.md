@@ -27,9 +27,8 @@ Uma API para validação de um Json Web Token
 
 ### Pré-requisitos:
 
-- JDK 17
+- JDK 17 ou Docker
 - Opcional: alguma IDE
-- Opcional: Docker
 
 ### Baixar o projeto:
 
@@ -45,20 +44,43 @@ Uma API para validação de um Json Web Token
 
 ### 2ª Opção: Rodar o .jar pelo terminal
 
-- Abrir o terminal do seu computador
-- Ir até o caminho do projeto e entrar na pasta do projeto (token-validation)    
-- `cd token-validation`
-- Rodar o comando: `java -jar jwt-validation.jar`
-- A aplicação vai começar a rodar, e você poderá acompanhar os logs pelo terminal do seu computador
-
+- Abra o terminal do seu computador
+- Entrar na pasta raiz do projeto (token-validation)    
+- Rodar o comando:
+```
+java -jar jwt-validation.jar
+```
+- A aplicação será iniciada e estará acessível em http://localhost:8080
+- Você pode acompanhar os logs do contêiner no terminal
+  
 ### 3ª Opção: Rodar com Docker
-- Abrir o terminal do seu computador
-- Ir até o caminho do projeto e entrar na pasta do projeto (token-validation)
-- `cd token-validation`
-- Rodar o comando: `docker build -t jwt-validation .` para construir a imagem Docker (você pode alterar o nome da imagem no comando)
-- Após a construção da imagem, rode esse comando `docker run -p 8080:8080 jwt-validation`, para executar o contâiner.
-- A aplicação vai começar a rodar, e você poderá acompanhar os logs pelo terminal do seu computador
-- Você pode também executar o contâiner pelo Docker Desktop, e acompanhar os logs por lá.
+- Abra o terminal do seu computador
+- Entrar na pasta raiz do projeto (token-validation)    
+- Rodar o comando para construir a imagem Docker (você pode alterar o nome da imagem):
+```
+docker build -t jwt-validation .
+```
+- Após a construção da imagem, rode esse comando para executar o contâiner:
+```
+docker run -p 8080:8080 jwt-validation
+```
+- A aplicação será iniciada e estará acessível em http://localhost:8080
+- Você pode acompanhar os logs do contêiner no terminal
+- Você pode também executar o contâiner pelo Docker Desktop, e acompanhar os logs por lá
+
+### 4ª Opção: Rodar com Docker usando a imagem do Docker Hub
+- Certifique-se de que o Docker esteja instalado e em execução em sua máquina
+- Abra o terminal do seu computador
+- Execute o comando a seguir para baixar a imagem da API do Docker Hub:
+```
+docker pull luisapurificacao1609/token-validation:latest
+```
+- Após o download da imagem, execute o contêiner com o seguinte comando:
+```
+docker run -p 8080:8080 luisapurificacao1609/token-validation:latest
+```
+- A aplicação será iniciada e estará acessível em http://localhost:8080
+- Você pode acompanhar os logs do contêiner no terminal
 
 ---
 
