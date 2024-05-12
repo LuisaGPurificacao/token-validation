@@ -29,13 +29,6 @@ public class AuthenticationFixture {
                 .build();
     }
 
-    public static AuthenticationResponse getInvalidResponse() {
-        return AuthenticationResponse.builder()
-                .isTokenValid(false)
-                .errorDescription("error")
-                .build();
-    }
-
     public static UserEntity getUserEntity() {
         return UserEntity.builder()
                 .name("Maria Oliveira")
